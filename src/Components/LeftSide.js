@@ -201,35 +201,27 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
     },
     firstCol: {
-        // backgroundColor: '#ff00a3',
         flex: 2,
-        // justifyContent: 'space-evenly',
-        // alignItems: 'center'
     },
     secondCol: {
-        // backgroundColor: '#9f00ff',
         flex: 2,
         alignItems: 'center',
         
     },
     thirdCol: {
-        // backgroundColor: '#1100ff',
         flex: 2,
         justifyContent: 'space-around'
         
     },
     fourthCol: {
-        // backgroundColor: '#00d6ff',
         flex: 1.5,
         alignItems: 'center'
     },
     fifthCol: {
-        // backgroundColor: '#00ff7d',
         flex: 3,
         flexWrap: 'wrap',
     },
     sixthCol: {
-        // backgroundColor: '#fff000',
         flex: 2,
         justifyContent: 'space-between',
         alignItems: 'center',
@@ -237,7 +229,6 @@ const styles = StyleSheet.create({
     },
     _items: {
         flex: 1,
-        // justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'row'
     },
@@ -296,7 +287,6 @@ const styles = StyleSheet.create({
     leftSix: {
         width: 190,
         height: 60,
-        // backgroundColor: 'lightgreen',
         alignItems: 'center'
     },
     rightSix: {
