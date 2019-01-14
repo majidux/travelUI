@@ -38,41 +38,105 @@ export default class LeftSide extends Component {
                             <Image
                                 source={require('../Assets/image/plane.png')}
                             />
-                            <Text style={[{fontSize: 13,marginLeft: 10},styles.whiteText]}>Flight</Text>
+                            <Text style={[styles.marginLeft10, styles.fontSize12, styles.whiteText]}>Flight</Text>
                         </View>
-                        <View style={[styles._items,{backgroundColor:'#526199'}]}>
+                        <View style={[styles._items, {backgroundColor: '#526199', paddingLeft: 50}]}>
                             <Image
                                 source={require('../Assets/image/house.png')}
                             />
-                            <Text style={[{fontSize: 13,marginLeft: 10},styles.whiteText]}>Hotel</Text>
+                            <Text style={[styles.marginLeft10, styles.fontSize12, styles.whiteText]}>Hotel</Text>
                         </View>
-                        <View style={[styles._items,{backgroundColor:'#526199'}]}>
+                        <View style={[styles._items, {backgroundColor: '#526199'}]}>
                             <Image
                                 source={require('../Assets/image/car.png')}
                             />
-                            <Text style={[{fontSize: 13,marginLeft: 10},styles.whiteText]}>Rental car</Text>
+                            <Text style={[styles.marginLeft10, styles.fontSize12, styles.whiteText]}>Rental car</Text>
                         </View>
                     </View>
                     
                     <View style={[styles.flexRow, styles.secondCol]}>
                         <View style={styles._selected}>
-                            <Text style={styles.whiteText}>Roundtrip</Text>
+                            <Text style={[styles.whiteText, styles.marginLeft10]}>Roundtrip</Text>
                         </View>
-                        <View>
-                            <Text style={styles.greyText}>One way</Text>
+                        <View style={styles.marginLeft50}>
+                            <Text style={[styles.greyText, styles.marginLeft10]}>One way</Text>
                         </View>
-                        <View>
-                            <Text style={styles.greyText}>Multi-City</Text>
+                        <View style={styles.marginLeft50}>
+                            <Text style={[styles.greyText, styles.marginLeft10]}>Multi-City</Text>
                         </View>
                     </View>
                     
-                    <View style={styles.thirdCol}><Text>Third</Text></View>
+                    <View style={styles.thirdCol}>
+                        <View style={[styles.flexRow, styles.locationText]}>
+                            <Image
+                                source={require('../Assets/image/location.png')}
+                            />
+                            <Text style={[styles.whiteText, styles.marginLeft10]}>Tbilisi</Text>
+                        </View>
+                        <View style={[styles.flexRow, styles.locationText]}>
+                            <Image
+                                source={require('../Assets/image/location.png')}
+                            />
+                            <Text style={[styles.greyText, styles.marginLeft10]}>To</Text>
+                        </View>
+                    </View>
                     
-                    <View style={[styles.flexRow, styles.fourthCol]}><Text>Forth</Text></View>
+                    <View style={[styles.flexRow, styles.fourthCol]}>
+                        <View style={[styles.cities]}>
+                            <Text style={[styles.whiteText, styles.fontSize12]}>Munich</Text>
+                        </View>
+                        <View style={[styles.cities, styles.marginLeft10]}>
+                            <Text style={[styles.whiteText, styles.fontSize12]}>Amsterdam</Text>
+                        </View>
+                    </View>
                     
-                    <View style={[styles.flexRow, styles.fifthCol]}><Text>Fifth</Text></View>
+                    <View style={[styles.flexRow, styles.fifthCol]}>
+                        <View style={[styles.flexRow, styles._filters]}>
+                            <Image
+                                source={require('../Assets/image/calendar.png')}
+                            />
+                            <Text style={[styles.greyText, styles.fontSize12, styles.marginLeft10]}>Departing</Text>
+                        </View>
+                        <View style={[styles.flexRow, styles._filters]}>
+                            <Image
+                                source={require('../Assets/image/calendar.png')}
+                            />
+                            <Text style={[styles.greyText, styles.fontSize12, styles.marginLeft10]}>returning</Text>
+                        </View>
+                        <View style={[styles.flexRow, styles._filters]}>
+                            <Image
+                                source={require('../Assets/image/users.png')}
+                            />
+                            <Text style={[styles.greyText, styles.fontSize12, styles.marginLeft10]}>Adults</Text>
+                        </View>
+                        <View style={[styles.flexRow, styles._filters]}>
+                            <Image
+                                source={require('../Assets/image/add.png')}
+                            />
+                            <Text style={[styles.greyText, styles.fontSize12, styles.marginLeft10]}>Economy</Text>
+                        </View>
+                    </View>
                     
-                    <View style={[styles.flexRow, styles.sixthCol]}><Text>sixth</Text></View>
+                    <View style={[styles.flexRow, styles.sixthCol]}>
+                        
+                        <View style={[styles.flexRow, styles.leftSix]}>
+                            
+                            <View>
+                                <View style={styles.square}></View>
+                            </View>
+                            
+                            <View>
+                                <Text style={[styles.marginLeft10, styles.greyText]}>Add a Hotel</Text>
+                            </View>
+                        </View>
+                        
+                        <View style={styles.rightSix}>
+                            <View>
+                                <Text style={[styles.fontSize12, styles.whiteText]}>Search Flights</Text>
+                            </View>
+                        </View>
+                    
+                    </View>
                 
                 </View>
             </View>
@@ -92,7 +156,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#405089',
         flex: 3,
         borderBottomRightRadius: 25,
-        borderBottomLeftRadius: 25
+        borderBottomLeftRadius: 25,
+        paddingLeft: 40,
     },
     logo: {
         flex: 1,
@@ -142,44 +207,105 @@ const styles = StyleSheet.create({
         // alignItems: 'center'
     },
     secondCol: {
-        backgroundColor: '#9f00ff',
+        // backgroundColor: '#9f00ff',
         flex: 2,
-        justifyContent:'space-around',
-        alignItems:'center',
+        alignItems: 'center',
+        
     },
     thirdCol: {
-        backgroundColor: '#1100ff',
-        flex: 2
+        // backgroundColor: '#1100ff',
+        flex: 2,
+        justifyContent: 'space-around'
+        
     },
     fourthCol: {
-        backgroundColor: '#00d6ff',
-        flex: 1.5
+        // backgroundColor: '#00d6ff',
+        flex: 1.5,
+        alignItems: 'center'
     },
     fifthCol: {
-        backgroundColor: '#00ff7d',
-        flex: 3
+        // backgroundColor: '#00ff7d',
+        flex: 3,
+        flexWrap: 'wrap',
     },
     sixthCol: {
-        backgroundColor: '#fff000',
-        flex: 2
+        // backgroundColor: '#fff000',
+        flex: 2,
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        paddingRight: 30
     },
     _items: {
         flex: 1,
-        justifyContent:'center',
+        // justifyContent: 'center',
         alignItems: 'center',
-        flexDirection:'row'
+        flexDirection: 'row'
     },
-    whiteText:{
-        color:'white'
+    whiteText: {
+        color: 'white'
     },
-    greyText:{
-        color:'#a0a9cb'
+    greyText: {
+        color: '#a0a9cb'
     },
-    _selected:{
-        backgroundColor:'#49bcf7',
+    _selected: {
+        backgroundColor: '#49bcf7',
         paddingVertical: 10,
         paddingHorizontal: 20,
-        borderRadius:25
+        borderRadius: 25
         
+    },
+    marginLeft10: {
+        marginLeft: 10,
+        fontSize: 12,
+        fontWeight: 'bold'
+    },
+    marginLeft50: {
+        marginLeft: 50
+    },
+    locationText: {
+        alignItems: 'center',
+        borderBottomColor: '#5369b4',
+        borderBottomWidth: 1,
+        marginRight: 30,
+        paddingVertical: 5
+    },
+    cities: {
+        backgroundColor: '#526199',
+        paddingHorizontal: 20,
+        paddingVertical: 10,
+        borderRadius: 25
+    },
+    fontSize12: {
+        fontSize: 12,
+        fontWeight: 'bold'
+    },
+    _filters: {
+        width: 190,
+        height: 60,
+        marginRight: 30,
+        alignItems: 'center',
+        borderBottomColor: '#5369b4',
+        borderBottomWidth: 1,
+    },
+    square: {
+        width: 15,
+        height: 15,
+        borderRadius:3,
+        backgroundColor: '#fff'
+    },
+    leftSix: {
+        width: 190,
+        height: 60,
+        // backgroundColor: 'lightgreen',
+        alignItems: 'center'
+    },
+    rightSix: {
+        width: 190,
+        height: 45,
+        backgroundColor: '#ff7555',
+        marginLeft: 20,
+        alignItems: 'center',
+        justifyContent:'center',
+        borderRadius:25
     }
 });
