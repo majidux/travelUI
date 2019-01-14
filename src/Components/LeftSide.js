@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, Text, StyleSheet, Image} from 'react-native';
+import {View, Text, StyleSheet, Image, TouchableOpacity,CheckBox} from 'react-native';
 
 
 export default class LeftSide extends Component {
@@ -122,20 +122,22 @@ export default class LeftSide extends Component {
                         <View style={[styles.flexRow, styles.leftSix]}>
                             
                             <View>
-                                <View style={styles.square}></View>
+                                <CheckBox/>
                             </View>
                             
                             <View>
                                 <Text style={[styles.marginLeft10, styles.greyText]}>Add a Hotel</Text>
                             </View>
                         </View>
-                        
+                        <TouchableOpacity>
                         <View style={styles.rightSix}>
-                            <View>
-                                <Text style={[styles.fontSize12, styles.whiteText]}>Search Flights</Text>
-                            </View>
+                            
+                                <View>
+                                    <Text style={[styles.fontSize12, styles.whiteText]}>Search Flights</Text>
+                                </View>
+                            
                         </View>
-                    
+                        </TouchableOpacity>
                     </View>
                 
                 </View>
@@ -271,18 +273,12 @@ const styles = StyleSheet.create({
         fontWeight: 'bold'
     },
     _filters: {
-        width: 190,
+        width: 180,
         height: 60,
         marginRight: 30,
         alignItems: 'center',
         borderBottomColor: '#5369b4',
         borderBottomWidth: 1,
-    },
-    square: {
-        width: 15,
-        height: 15,
-        borderRadius:3,
-        backgroundColor: '#fff'
     },
     leftSix: {
         width: 190,
@@ -295,7 +291,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#ff7555',
         marginLeft: 20,
         alignItems: 'center',
-        justifyContent:'center',
-        borderRadius:25
+        justifyContent: 'center',
+        borderRadius: 25
     }
 });

@@ -13,6 +13,6 @@ export default class Bottom extends Component {
 const styles = StyleSheet.create({
     _Bottom: {
         flex: 1,
-        backgroundColor:'red'
+        backgroundColor:'wheat'
     }
 });
