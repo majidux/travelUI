@@ -12,7 +12,7 @@ export default class LeftSide extends Component {
                     
                     <View style={styles.logo}>
                         <View style={styles.logoView}>
-                            <Text style={styles.titleStyle}>Travel.</Text>
+                            <Text style={[styles.titleStyle,styles.mainColor]}>Travel.</Text>
                             <Image
                                 source={require('../Assets/image/logo.png')}
                             />
@@ -21,11 +21,11 @@ export default class LeftSide extends Component {
                     
                     <View style={styles.social}>
                         <View style={styles.instagram}>
-                            <Text style={styles._text}>Instagram</Text>
+                            <Text style={[styles._text,styles.mainColor]}>Instagram</Text>
                         </View>
                         
                         <View style={styles.facebook}>
-                            <Text style={styles._text}>Facebook</Text>
+                            <Text style={[styles._text,styles.mainColor]}>Facebook</Text>
                         </View>
                     </View>
                 
@@ -198,6 +198,7 @@ const styles = StyleSheet.create({
     },
     _text: {
         color: 'black',
+        fontWeight:'bold'
     },
     flexRow: {
         flexDirection: 'row',
@@ -293,5 +294,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 25
-    }
+    },
+    mainColor:{
+        color:'#454c75'
+    },
 });
