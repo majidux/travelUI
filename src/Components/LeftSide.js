@@ -4,6 +4,24 @@ import {View, Text, StyleSheet, Image, TouchableOpacity,CheckBox} from 'react-na
 
 export default class LeftSide extends Component {
     
+    constructor(props){
+        super(props);
+        this.state={
+            date:new Date(),
+        }
+    }
+    
+    
+    componentDidMount() {
+        this.timer();
+    }
+    
+    
+    timer = () => this.timer = setInterval( ()=>this._time(),1000);
+    _time = () => this.setState({date:new Date()});
+    
+    
+    
     
     render() {
         return (
@@ -26,6 +44,7 @@ export default class LeftSide extends Component {
                         
                         <View style={styles.facebook}>
                             <Text style={[styles._text,styles.mainColor]}>Facebook</Text>
+                            <Text style={[styles.boldFont,styles.mainColor]}>{this.state.date.toLocaleTimeString()}</Text>
                         </View>
                     </View>
                 
