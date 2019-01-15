@@ -8,19 +8,21 @@ export default class LeftSide extends Component {
         super(props);
         this.state={
             date:new Date(),
+            checkBox:false
         }
     }
     
     
     componentDidMount() {
         this.timer();
+        this.check();
     }
     
     
     timer = () => this.timer = setInterval( ()=>this._time(),1000);
     _time = () => this.setState({date:new Date()});
     
-    
+    check =() => this.setState({checkBox:!this.state.checkBox});
     
     
     render() {
@@ -141,7 +143,7 @@ export default class LeftSide extends Component {
                         <View style={[styles.flexRow, styles.leftSix]}>
                             
                             <View>
-                                <CheckBox/>
+                                <CheckBox onValueChange={this.check} value={true}/>
                             </View>
                             
                             <View>
