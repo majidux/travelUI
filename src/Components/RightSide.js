@@ -165,17 +165,17 @@ export default class RightSide extends Component {
                                         
                                         <TouchableHighlight
                                             underlayColor={'#e7e7e7'}
-                                            style={this.state.selectedContact !== item.email ?
+                                            style={this.state.selectedContact !== item.id.name ?
                                                 styles._highlight : styles._highlightSelected}
                                             activeOpacity={.8}
-                                            onPress={() => this.setState({selectedContact: item.email})}
+                                            onPress={() => this.setState({selectedContact: item.id.name})}
                                             onHideUnderlay={this.pressButtonHide.bind(this)}
                                             onShowUnderlay={this.pressButtonShow.bind(this)}
                                         >
                                             <View style={[styles.flexRow, {alignItems: 'center', flex: 1}]}>
                                                 <View style={styles.booking}>
                                                     <Text style={
-                                                        this.state.selectedContact !== item.email ?
+                                                        this.state.selectedContact !== item.id.name ?
                                                             styles.blackFont : styles.whiteFont
                                                     }>Book now</Text>
                                                 </View>

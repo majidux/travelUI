@@ -7,21 +7,20 @@ export default class LeftSide extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            date: new Date(),
-            checkBox: false
+            checkBox: false,
         }
     }
     
     
     componentDidMount() {
-        this.timer();
         this.check();
     }
     
     
-    timer = () => this.timer = setInterval(() => this.setState({date: new Date()}), 1000);
     
     check = () => this.setState({checkBox: !this.state.checkBox});
+    
+
     
     
     render() {
@@ -39,13 +38,18 @@ export default class LeftSide extends Component {
                     </View>
                     
                     <View style={styles.social}>
-                        <View style={styles.instagram}>
-                            <Text style={!this.props.theme ? styles._text : styles._textDark}>Instagram</Text>
-                        </View>
                         
-                        <View style={styles.facebook}>
-                            <Text style={!this.props.theme ? styles._text : styles._textDark}>Facebook</Text>
-                        </View>
+                        
+                            <View style={styles.instagram}>
+                                <Text style={!this.props.theme ? styles._text : styles._textDark}>Instagram</Text>
+                            </View>
+                        
+                        
+                        
+                            <View style={styles.facebook}>
+                                <Text style={!this.props.theme ? styles._text : styles._textDark}>Facebook</Text>
+                            </View>
+                    
                     </View>
                 
                 
@@ -218,7 +222,7 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: 'bold',
         marginRight: 20,
-        color: '#454c75'
+        color: '#454c75',
     },
     titleStyleDark: {
         fontSize: 20,
