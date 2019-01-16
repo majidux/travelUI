@@ -1,14 +1,14 @@
 import React, {Component} from 'react';
-import {View, Text, StyleSheet, Image, TouchableOpacity,CheckBox} from 'react-native';
+import {View, Text, StyleSheet, Image, TouchableOpacity, CheckBox} from 'react-native';
 
 
 export default class LeftSide extends Component {
     
-    constructor(props){
+    constructor(props) {
         super(props);
-        this.state={
-            date:new Date(),
-            checkBox:null
+        this.state = {
+            date: new Date(),
+            checkBox: false
         }
     }
     
@@ -19,10 +19,10 @@ export default class LeftSide extends Component {
     }
     
     
-    timer = () => this.timer = setInterval( ()=>this._time(),1000);
-    _time = () => this.setState({date:new Date()});
+    timer = () => this.timer = setInterval(() => this._time(), 1000);
+    _time = () => this.setState({date: new Date()});
     
-    check =() => this.setState({checkBox:!this.state.checkBox});
+    check = () => this.setState({checkBox: !this.state.checkBox});
     
     
     render() {
@@ -60,7 +60,7 @@ export default class LeftSide extends Component {
                             />
                             <Text style={[styles.marginLeft10, styles.fontSize12, styles.whiteText]}>Flight</Text>
                         </View>
-                        <View style={[styles._items, {backgroundColor: '#526199', paddingLeft: 50}]}>
+                        <View style={[styles._items, {backgroundColor: '#526199'}]}>
                             <Image
                                 source={require('../Assets/image/house.png')}
                             />
@@ -110,30 +110,34 @@ export default class LeftSide extends Component {
                         </View>
                     </View>
                     
-                    <View style={[styles.flexRow, styles.fifthCol]}>
-                        <View style={[styles.flexRow, styles._filters]}>
-                            <Image
-                                source={require('../Assets/image/calendar.png')}
-                            />
-                            <Text style={[styles.greyText, styles.fontSize12, styles.marginLeft10]}>Departing</Text>
+                    <View style={[styles.fifthCol]}>
+                        <View style={[styles.flexRow, {flex: 1}]}>
+                            <View style={[styles.flexRow, styles._filters]}>
+                                <Image
+                                    source={require('../Assets/image/calendar.png')}
+                                />
+                                <Text style={[styles.greyText, styles.fontSize12, styles.marginLeft10]}>Departing</Text>
+                            </View>
+                            <View style={[styles.flexRow, styles._filters]}>
+                                <Image
+                                    source={require('../Assets/image/calendar.png')}
+                                />
+                                <Text style={[styles.greyText, styles.fontSize12, styles.marginLeft10]}>returning</Text>
+                            </View>
                         </View>
-                        <View style={[styles.flexRow, styles._filters]}>
-                            <Image
-                                source={require('../Assets/image/calendar.png')}
-                            />
-                            <Text style={[styles.greyText, styles.fontSize12, styles.marginLeft10]}>returning</Text>
-                        </View>
-                        <View style={[styles.flexRow, styles._filters]}>
-                            <Image
-                                source={require('../Assets/image/users.png')}
-                            />
-                            <Text style={[styles.greyText, styles.fontSize12, styles.marginLeft10]}>Adults</Text>
-                        </View>
-                        <View style={[styles.flexRow, styles._filters]}>
-                            <Image
-                                source={require('../Assets/image/add.png')}
-                            />
-                            <Text style={[styles.greyText, styles.fontSize12, styles.marginLeft10]}>Economy</Text>
+                        <View style={[styles.flexRow, {flex: 1}]}>
+                            <View style={[styles.flexRow, styles._filters]}>
+                                <Image
+                                    source={require('../Assets/image/users.png')}
+                                />
+                                <Text style={[styles.greyText, styles.fontSize12, styles.marginLeft10]}>Adults</Text>
+                            </View>
+                            <View style={[styles.flexRow, styles._filters]}>
+                                <Image
+                                    source={require('../Assets/image/add.png')}
+                                />
+                                <Text style={[styles.greyText, styles.fontSize12, styles.marginLeft10]}>Economy</Text>
+                            </View>
                         </View>
                     </View>
                     
@@ -142,7 +146,8 @@ export default class LeftSide extends Component {
                         <View style={[styles.flexRow, styles.leftSix]}>
                             
                             <View>
-                                <CheckBox onValueChange={this.check} value={true}/>
+                                <CheckBox value={this.state.checkBox}
+                                          onValueChange={() => this.setState({checked: !this.state.checked})}/>
                             </View>
                             
                             <View>
@@ -150,13 +155,13 @@ export default class LeftSide extends Component {
                             </View>
                         </View>
                         <TouchableOpacity>
-                        <View style={styles.rightSix}>
-                            
+                            <View style={styles.rightSix}>
+                                
                                 <View>
                                     <Text style={[styles.fontSize12, styles.whiteText]}>Search Flights</Text>
                                 </View>
                             
-                        </View>
+                            </View>
                         </TouchableOpacity>
                     </View>
                 
@@ -179,7 +184,7 @@ const styles = StyleSheet.create({
         flex: 4,
         borderBottomRightRadius: 25,
         borderBottomLeftRadius: 25,
-        paddingLeft: 40,
+        paddingLeft: 20,
     },
     logo: {
         flex: 1,
@@ -214,7 +219,7 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: 'bold',
         marginRight: 20,
-        color:'#454c75'
+        color: '#454c75'
     },
     titleStyleDark: {
         fontSize: 20,
@@ -223,12 +228,12 @@ const styles = StyleSheet.create({
         color: '#fff',
     },
     _text: {
-        fontWeight:'bold',
-        color:'#454c75'
+        fontWeight: 'bold',
+        color: '#454c75'
     },
     _textDark: {
-        fontWeight:'bold',
-        color:'#fff'
+        fontWeight: 'bold',
+        color: '#fff'
     },
     flexRow: {
         flexDirection: 'row',
@@ -252,7 +257,6 @@ const styles = StyleSheet.create({
     },
     fifthCol: {
         flex: 3,
-        flexWrap: 'wrap',
     },
     sixthCol: {
         flex: 2,
@@ -263,7 +267,8 @@ const styles = StyleSheet.create({
     _items: {
         flex: 1,
         alignItems: 'center',
-        flexDirection: 'row'
+        flexDirection: 'row',
+        justifyContent: 'center'
     },
     whiteText: {
         color: 'white'
@@ -304,28 +309,23 @@ const styles = StyleSheet.create({
         fontWeight: 'bold'
     },
     _filters: {
-        width: 180,
-        height: 60,
-        marginRight: 30,
+        flex: 1,
+        marginHorizontal: 15,
         alignItems: 'center',
         borderBottomColor: '#5369b4',
         borderBottomWidth: 1,
     },
     leftSix: {
-        width: 190,
-        height: 60,
-        alignItems: 'center'
+        alignItems: 'center',
     },
     rightSix: {
-        width: 190,
-        height: 45,
+        
+        paddingHorizontal: 15,
+        paddingVertical: 10,
         backgroundColor: '#ff7555',
-        marginLeft: 20,
-        alignItems: 'center',
-        justifyContent: 'center',
         borderRadius: 25
     },
-    mainColor:{
-        color:'#454c75'
+    mainColor: {
+        color: '#454c75'
     },
 });

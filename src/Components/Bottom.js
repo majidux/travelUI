@@ -79,13 +79,16 @@ const styles = StyleSheet.create({
     _Bottom: {
         flex: 1,
         // backgroundColor: 'pink',
-        alignItems: 'flex-end'
+        alignItems: 'flex-end',
+        justifyContent:'space-between',
+        paddingLeft: 30
     },
     mainBottom: {
-        width: widthDevice - 145,
+        width: widthDevice - 80,
+        // flex:1,
         // backgroundColor: 'wheat',
         paddingTop: 10,
-        flexDirection: 'row'
+        flexDirection: 'row',
     },
     fontSize20: {
         fontSize: 20
@@ -94,15 +97,15 @@ const styles = StyleSheet.create({
         color: '#454c75'
     },
     _right:{
-        width:widthDevice/2.2,
-        // backgroundColor:'lightgreen',
+        // width:widthDevice/2.5,
         flexDirection:'row',
+        flex:1,
         justifyContent: 'space-evenly',
     },
     _left:{
-        // backgroundColor:'skyblue',
-        width:widthDevice/2.5,
+        // width:widthDevice/4,
         justifyContent: 'space-evenly',
+        flex:1
     },
     bottomItems:{
         paddingVertical: 12

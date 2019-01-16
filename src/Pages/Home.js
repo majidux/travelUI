@@ -33,7 +33,7 @@ export default class Home extends Component {
                                 </View>
                                 :
                                 <View style={[styles._buttons]}>
-                                    <Text style={{color:'#2b3844',fontSize:12,fontWeight: 'bold'}}>Dark Mode</Text>
+                                    <Text style={{color:'#405089',fontSize:12,fontWeight: 'bold'}}>Dark Mode</Text>
                                 </View>
                             }
                         </TouchableOpacity>

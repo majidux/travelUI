@@ -23,7 +23,7 @@ export default class RightSide extends Component {
             page: 0,
             loading: false,
             menu: false,
-            selectedContact: null
+            selectedContact: null,
         }
     }
     
@@ -54,7 +54,8 @@ export default class RightSide extends Component {
     
     pressButtonHide = () => this.setState({selected: !this.state.selected});
     pressButtonShow = () => this.setState({selected: !this.state.selected});
-    header = () => !this.state.loading && <ActivityIndicator size={'large'} color={'#405089'}/>;
+    header = () => !this.state.loading && <View><ActivityIndicator size={'large'} color={'#405089'}/></View>;
+    footer = () => this.state.loading && <View><ActivityIndicator size={'large'} color={'#405089'}/></View>;
     handleEnd = () => this.setState(_reFresh => ({page: _reFresh.page + 1}), () => this.fetchData());
     pressMenu = () => this.setState({menu: !this.state.menu});
     
@@ -110,6 +111,7 @@ export default class RightSide extends Component {
                         data={this.state.lastData}
                         keyExtractor={(item) => item.email}
                         ListHeaderComponent={this.header}
+                        ListFooterComponent={this.footer}
                         onEndReached={() => this.handleEnd()}
                         onEndReachedThreshold={.5}
                         extraData={() => this.state.selected}
@@ -118,18 +120,18 @@ export default class RightSide extends Component {
                             
                             <View style={!this.props.theme ? styles.flatListInside : styles.flatListInsideDark}>
                                 <View style={[styles.flexRow, styles.itemFlat]}>
-                                    <View>
+                                    <View style={{alignItems:'flex-start',flex:1}}>
                                         <Text
                                             style={!this.props.theme ? [styles.boldFont, styles.mainColor]:[styles.boldFont, styles.darkFont]}>{item.location.city.charAt(0).toUpperCase() + item.location.city.slice(1).toLowerCase()}</Text>
                                     </View>
-                                    <View style={[styles.flexRow, {alignItems: 'center'}]}>
+                                    <View style={[styles.flexRow, {alignItems:'center',flex:1}]}>
                                         <Text style={styles.fontSize10}>From </Text>
                                         <Text style={!this.props.theme ? [styles.boldFont, styles.mainColor]:[styles.boldFont, styles.darkFont]}>{item.dob.age}0 GEL</Text>
                                     </View>
                                 </View>
                                 <View style={[styles.flexRow, styles.itemFlat]}>
                                     
-                                    <View style={{justifyContent: 'center'}}>
+                                    <View style={{justifyContent: 'center',alignItems:'flex-end'}}>
                                         <Text
                                             style={!this.props.theme ? [styles.mainColor, styles.boldFont]:[styles.darkFont, styles.boldFont]}>{item.registered.date.substring(6, 10)} - {item.dob.date.substring(6, 10)}</Text>
                                     </View>
@@ -143,7 +145,7 @@ export default class RightSide extends Component {
                                         onHideUnderlay={this.pressButtonHide.bind(this)}
                                         onShowUnderlay={this.pressButtonShow.bind(this)}
                                     >
-                                        <View style={[styles.flexRow, {alignItems: 'center'}]}>
+                                        <View style={[styles.flexRow, {alignItems: 'center',flex:1}]}>
                                             <View style={styles.booking}>
                                                 <Text style={
                                                     this.state.selectedContact !== item.email ?
@@ -166,7 +168,6 @@ export default class RightSide extends Component {
                             
                         }
                     />
-                    
                     {/*FlatList ends here*/}
                 
                 </View>
@@ -232,7 +233,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold'
     },
     flatListInside: {
-        height: 100,
+        minHeight: 80,
         flexDirection: 'row',
         borderBottomWidth: 1,
         borderBottomColor: '#e7e8f3',
@@ -240,7 +241,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     flatListInsideDark: {
-        height: 100,
+        minHeight: 80,
         flexDirection: 'row',
         borderBottomWidth: 1,
         borderBottomColor: '#405089',
@@ -254,7 +255,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
     },
     booking: {
-        marginHorizontal: 10
+        marginHorizontal: 5
     },
     _blue: {
         backgroundColor: 'blue',
@@ -269,9 +270,10 @@ const styles = StyleSheet.create({
         color: '#fff'
     },
     itemFlat: {
-        justifyContent: 'space-between',
+        justifyContent: 'space-evenly',
         // backgroundColor:'green',
-        width: 250
+        // width: 250,
+        flex:1
     },
     fontSize10: {
         fontSize: 10,
