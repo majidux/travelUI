@@ -14,7 +14,7 @@ export default class Bottom extends Component {
                     
                     <View style={styles._left}>
                         <View style={styles.bottomItems}>
-                            <Text style={[styles.mainColor, styles.boldFont, styles.fontSize20]}>Check-in/My Booking</Text>
+                            <Text style={!this.props.theme ? [styles.mainColor, styles.boldFont, styles.fontSize20]:[styles.darkFont, styles.boldFont, styles.fontSize20]}>Check-in/My Booking</Text>
                         </View>
                         <View style={[styles.bottomItems,styles.flexRow]}>
                             <View style={styles.nameAndBook}>
@@ -25,7 +25,7 @@ export default class Bottom extends Component {
                             </View>
                         </View>
                         <View style={[styles.bottomItems,styles.flexRow]}>
-                            <Text style={styles._margin}>Go</Text>
+                            <Text style={!this.props.theme ? [styles._margin,styles.mainColor] : [styles.darkFont,styles._margin]}>Go</Text>
                             <Image
                                 source={require('../Assets/image/right-arrow-blue.png')}
                             />
@@ -41,7 +41,7 @@ export default class Bottom extends Component {
                                 />
                             </View>
                             <View>
-                                <Text style={[{marginLeft: 10},styles.boldFont,styles.mainColor]}>Prague</Text>
+                                <Text style={!this.props.theme ? [{marginLeft: 10},styles.boldFont,styles.mainColor]:[{marginLeft: 10},styles.boldFont,styles.darkFont]}>Prague</Text>
                             </View>
                         </View>
                         <View style={styles.recommend}>
@@ -52,7 +52,7 @@ export default class Bottom extends Component {
                                 />
                             </View>
                             <View>
-                                <Text style={[{marginLeft: 10},styles.boldFont,styles.mainColor]}>Stockholm</Text>
+                                <Text style={!this.props.theme ? [{marginLeft: 10},styles.boldFont,styles.mainColor]:[{marginLeft: 10},styles.boldFont,styles.darkFont]}>Stockholm</Text>
                             </View>
                         </View>
                         <View style={styles.recommend}>
@@ -63,7 +63,7 @@ export default class Bottom extends Component {
                                 />
                             </View>
                             <View>
-                                <Text style={[{marginLeft: 10},styles.boldFont,styles.mainColor]}>Bali</Text>
+                                <Text style={!this.props.theme ? [{marginLeft: 10},styles.boldFont,styles.mainColor]:[{marginLeft: 10},styles.boldFont,styles.darkFont]}>Bali</Text>
                             </View>
                         </View>
                     </View>
@@ -138,5 +138,8 @@ const styles = StyleSheet.create({
     recommend:{
         flexDirection:'row',
         alignItems:'center'
-    }
+    },
+    darkFont:{
+        color:'#fff'
+    },
 });

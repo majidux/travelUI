@@ -32,7 +32,7 @@ export default class LeftSide extends Component {
                     
                     <View style={styles.logo}>
                         <View style={styles.logoView}>
-                            <Text style={[styles.titleStyle,styles.mainColor]}>Travel.</Text>
+                            <Text style={!this.props.theme ? styles.titleStyle : styles.titleStyleDark}>Travel.</Text>
                             <Image
                                 source={require('../Assets/image/logo.png')}
                             />
@@ -41,12 +41,11 @@ export default class LeftSide extends Component {
                     
                     <View style={styles.social}>
                         <View style={styles.instagram}>
-                            <Text style={[styles._text,styles.mainColor]}>Instagram</Text>
+                            <Text style={!this.props.theme ? styles._text : styles._textDark}>Instagram</Text>
                         </View>
                         
                         <View style={styles.facebook}>
-                            <Text style={[styles._text,styles.mainColor]}>Facebook</Text>
-                            <Text style={[styles.boldFont,styles.mainColor]}>{this.state.date.toLocaleTimeString()}</Text>
+                            <Text style={!this.props.theme ? styles._text : styles._textDark}>Facebook</Text>
                         </View>
                     </View>
                 
@@ -169,7 +168,7 @@ export default class LeftSide extends Component {
 const styles = StyleSheet.create({
     leftSide: {
         flex: 1,
-        flexDirection: 'row'
+        flexDirection: 'row',
     },
     logoArea: {
         flex: 1,
@@ -177,7 +176,7 @@ const styles = StyleSheet.create({
     },
     searchField: {
         backgroundColor: '#405089',
-        flex: 3,
+        flex: 4,
         borderBottomRightRadius: 25,
         borderBottomLeftRadius: 25,
         paddingLeft: 40,
@@ -215,11 +214,21 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: 'bold',
         marginRight: 20,
-        color: 'black',
+        color:'#454c75'
+    },
+    titleStyleDark: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        marginRight: 20,
+        color: '#fff',
     },
     _text: {
-        color: 'black',
-        fontWeight:'bold'
+        fontWeight:'bold',
+        color:'#454c75'
+    },
+    _textDark: {
+        fontWeight:'bold',
+        color:'#fff'
     },
     flexRow: {
         flexDirection: 'row',

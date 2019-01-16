@@ -44,6 +44,7 @@ export default class RightSide extends Component {
             .then(data => {
                 this.setState(
                     {lastData: [...lastData, ...data.results], loading: true});
+                          this.setState({filteredData:this.state.lastData})
             })
             .catch(error => alert('Server Not found'));
     };
@@ -87,18 +88,18 @@ export default class RightSide extends Component {
                         }
                     </View>
                     <View style={styles.menuItems}>
-                        <Text style={[styles.fontSize10, styles.boldFont, styles.mainColor]}
+                        <Text style={!this.props.theme ? [styles.fontSize10, styles.boldFont, styles.mainColor] : [styles.fontSize10, styles.boldFont, styles.darkFont] }
                               onPress={() => this.pressMenu()}>Menu</Text>
                     
                     
                     </View>
                     <View style={[styles.menuItems, styles.lineMenu]}>
-                        <View style={{borderBottomWidth: 2, borderBottomColor: '#405089', width: 15}}></View>
-                        <View style={{borderTopWidth: 2, borderTopColor: '#405089', width: 25}}></View>
+                        <View style={!this.props.theme ? {borderBottomWidth: 2, borderBottomColor: '#405089', width: 15}:{borderBottomWidth: 2, borderBottomColor: '#fff', width: 15}}></View>
+                        <View style={!this.props.theme ? {borderTopWidth: 2, borderTopColor: '#405089', width: 25}:{borderTopWidth: 2, borderTopColor: '#fff', width: 25}}></View>
                     </View>
                 </View>
                 <View style={styles.titleHeader}>
-                    <Text style={[styles.fontSizeTitle, styles.mainColor]}>Best Value Offers to Europe!</Text>
+                    <Text style={!this.props.theme ? [styles.fontSizeTitle, styles.mainColor] : [styles.fontSizeTitle, styles.darkFont]}>Best Value Offers to Europe!</Text>
                 </View>
                 
                 <View style={styles._flatList}>
@@ -115,22 +116,22 @@ export default class RightSide extends Component {
                         renderItem={({item}) =>
                             
                             
-                            <View style={styles.flatListInside}>
+                            <View style={!this.props.theme ? styles.flatListInside : styles.flatListInsideDark}>
                                 <View style={[styles.flexRow, styles.itemFlat]}>
                                     <View>
                                         <Text
-                                            style={[styles.boldFont, styles.mainColor]}>{item.location.city.charAt(0).toUpperCase() + item.location.city.slice(1).toLowerCase()}</Text>
+                                            style={!this.props.theme ? [styles.boldFont, styles.mainColor]:[styles.boldFont, styles.darkFont]}>{item.location.city.charAt(0).toUpperCase() + item.location.city.slice(1).toLowerCase()}</Text>
                                     </View>
                                     <View style={[styles.flexRow, {alignItems: 'center'}]}>
                                         <Text style={styles.fontSize10}>From </Text>
-                                        <Text style={[styles.boldFont, styles.mainColor]}>{item.dob.age}0 GEL</Text>
+                                        <Text style={!this.props.theme ? [styles.boldFont, styles.mainColor]:[styles.boldFont, styles.darkFont]}>{item.dob.age}0 GEL</Text>
                                     </View>
                                 </View>
                                 <View style={[styles.flexRow, styles.itemFlat]}>
                                     
                                     <View style={{justifyContent: 'center'}}>
                                         <Text
-                                            style={[styles.mainColor, styles.boldFont]}>{item.registered.date.substring(6, 10)} - {item.dob.date.substring(6, 10)}</Text>
+                                            style={!this.props.theme ? [styles.mainColor, styles.boldFont]:[styles.darkFont, styles.boldFont]}>{item.registered.date.substring(6, 10)} - {item.dob.date.substring(6, 10)}</Text>
                                     </View>
                                     
                                     <TouchableHighlight
@@ -176,7 +177,7 @@ export default class RightSide extends Component {
                         <Text style={[styles.fontSize10, styles.greyFont]}>fees and carrier charges.</Text>
                     </View>
                     <View>
-                        <Text style={[styles.mainColor, styles.boldFont]}>See all</Text>
+                        <Text style={!this.props.theme ? [styles.mainColor, styles.boldFont]:[styles.darkFont, styles.boldFont]}>See all</Text>
                     </View>
                 </View>
             
@@ -187,8 +188,8 @@ export default class RightSide extends Component {
 const styles = StyleSheet.create({
     rightSide: {
         flex: 1,
-        paddingLeft: 50,
-        paddingTop: 20
+        paddingTop: 20,
+    
     },
     menuHeader: {
         justifyContent: 'flex-end',
@@ -237,8 +238,14 @@ const styles = StyleSheet.create({
         borderBottomColor: '#e7e8f3',
         justifyContent: 'space-between',
         alignItems: 'center'
-        // paddingVertical: 10,
-        // marginVertical: 10
+    },
+    flatListInsideDark: {
+        height: 100,
+        flexDirection: 'row',
+        borderBottomWidth: 1,
+        borderBottomColor: '#405089',
+        justifyContent: 'space-between',
+        alignItems: 'center'
     },
     boldFont: {
         fontWeight: 'bold'
@@ -272,6 +279,9 @@ const styles = StyleSheet.create({
     },
     mainColor: {
         color: '#454c75'
+    },
+    darkFont:{
+        color:'#fff'
     },
     greyFont: {
         color: '#9aa0ae'
