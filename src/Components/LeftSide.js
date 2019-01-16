@@ -8,7 +8,7 @@ export default class LeftSide extends Component {
         super(props);
         this.state={
             date:new Date(),
-            checkBox:false
+            checkBox:null
         }
     }
     

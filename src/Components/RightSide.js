@@ -110,7 +110,7 @@ export default class RightSide extends Component {
                         data={this.state.lastData}
                         keyExtractor={(item) => item.email}
                         ListHeaderComponent={this.header}
-                        onEndReached={() => this.handleEnd}
+                        onEndReached={() => this.handleEnd()}
                         onEndReachedThreshold={.5}
                         extraData={() => this.state.selected}
                         renderItem={({item}) =>

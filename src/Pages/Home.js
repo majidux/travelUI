@@ -28,12 +28,12 @@ export default class Home extends Component {
                         
                         <TouchableOpacity onPress={this.changeTheme}>
                             {this.state.theme ?
-                                <View style={[styles._buttons,{backgroundColor:'#fff'}]}>
-                                    <Text style={{color:'#405089',fontSize:12}}>Light Mode</Text>
+                                <View style={[styles._buttons]}>
+                                    <Text style={{color:'#fff',fontSize:12,fontWeight: 'bold'}}>Light Mode</Text>
                                 </View>
                                 :
-                                <View style={[styles._buttons,{backgroundColor:'#405089'}]}>
-                                    <Text style={{color:'#fff',fontSize:12}}>Dark Mode</Text>
+                                <View style={[styles._buttons]}>
+                                    <Text style={{color:'#2b3844',fontSize:12,fontWeight: 'bold'}}>Dark Mode</Text>
                                 </View>
                             }
                         </TouchableOpacity>
