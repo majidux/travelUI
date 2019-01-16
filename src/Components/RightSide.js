@@ -2,12 +2,14 @@ import React, {Component} from 'react';
 import {
     View,
     Text,
+    TextInput,
     StyleSheet,
     Image,
     FlatList,
     TouchableHighlight,
     ActivityIndicator,
-    TouchableOpacity
+    TouchableOpacity,
+    KeyboardAvoidingView
 } from 'react-native';
 
 export default class RightSide extends Component {
@@ -28,7 +30,7 @@ export default class RightSide extends Component {
     }
     
     
-    // Lifecycles
+    // LifeCycles
     
     componentDidMount() {
         this.fetchData();
@@ -39,15 +41,24 @@ export default class RightSide extends Component {
     
     fetchData = () => {
         let lastData = this.state.lastData;
-        fetch('https://randomuser.me/api/?results=15')
+        fetch('https://randomuser.me/api/?results=10')
             .then(response => response.json())
             .then(data => {
                 this.setState(
                     {lastData: [...lastData, ...data.results], loading: true});
-                          this.setState({filteredData:this.state.lastData})
+                this.setState({filteredData: this.state.lastData})
             })
             .catch(error => alert('Server Not found'));
     };
+    
+    
+    //Searching
+    // searchData = text => {
+    //     let result = this.data.filter(search => `${search.location.city.toUpperCase()}`.includes(text.toUpperCase()));
+    //     this.setState({
+    //         filteredData: result
+    //     });
+    // };
     
     
     // Functions
@@ -62,127 +73,145 @@ export default class RightSide extends Component {
     
     render() {
         return (
-            <View style={styles.rightSide}>
-                <View style={styles.menuHeader}>
-                    <View style={styles.menuItems}>
-                        
-                        <Text style={[styles.fontSize10, styles.boldFont, styles.greyFont]}>Check-in</Text>
-                    </View>
+                <View style={styles.rightSide}>
                     
-                    <View style={styles.menuItems}>
-                        <Text style={[styles.fontSize10, styles.boldFont, styles.greyFont]}>Flight Status</Text>
-                        {this.state.menu &&
-                        <View style={styles.hiddenMenu}>
-                            <TouchableOpacity>
-                                <Text style={[styles.mainColor, styles.boldFont]}>Home</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity>
-                                <Text style={[styles.mainColor, styles.boldFont]}>Menu</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity>
-                                <Text style={[styles.mainColor, styles.boldFont]}>About</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity>
-                                <Text style={[styles.mainColor, styles.boldFont]}>Contact</Text>
-                            </TouchableOpacity>
+                    <View style={styles.menuHeader}>
+                        <View style={styles.menuItems}>
+                            <Text
+                                style={[styles.fontSize10, styles.boldFont, styles.greyFont]}>{this.state.lastData.length}</Text>
                         </View>
-                        }
-                    </View>
-                    <View style={styles.menuItems}>
-                        <Text style={!this.props.theme ? [styles.fontSize10, styles.boldFont, styles.mainColor] : [styles.fontSize10, styles.boldFont, styles.darkFont] }
-                              onPress={() => this.pressMenu()}>Menu</Text>
-                    
-                    
-                    </View>
-                    <View style={[styles.menuItems, styles.lineMenu]}>
-                        <View style={!this.props.theme ? {borderBottomWidth: 2, borderBottomColor: '#405089', width: 15}:{borderBottomWidth: 2, borderBottomColor: '#fff', width: 15}}></View>
-                        <View style={!this.props.theme ? {borderTopWidth: 2, borderTopColor: '#405089', width: 25}:{borderTopWidth: 2, borderTopColor: '#fff', width: 25}}></View>
-                    </View>
-                </View>
-                <View style={styles.titleHeader}>
-                    <Text style={!this.props.theme ? [styles.fontSizeTitle, styles.mainColor] : [styles.fontSizeTitle, styles.darkFont]}>Best Value Offers to Europe!</Text>
-                </View>
-                
-                <View style={styles._flatList}>
-                    
-                    {/*FlatList starts here*/}
-                    
-                    <FlatList
-                        data={this.state.lastData}
-                        keyExtractor={(item) => item.email}
-                        ListHeaderComponent={this.header}
-                        ListFooterComponent={this.footer}
-                        onEndReached={() => this.handleEnd()}
-                        onEndReachedThreshold={.5}
-                        extraData={() => this.state.selected}
-                        renderItem={({item}) =>
-                            
-                            
-                            <View style={!this.props.theme ? styles.flatListInside : styles.flatListInsideDark}>
-                                <View style={[styles.flexRow, styles.itemFlat]}>
-                                    <View style={{alignItems:'flex-start',flex:1}}>
-                                        <Text
-                                            style={!this.props.theme ? [styles.boldFont, styles.mainColor]:[styles.boldFont, styles.darkFont]}>{item.location.city.charAt(0).toUpperCase() + item.location.city.slice(1).toLowerCase()}</Text>
-                                    </View>
-                                    <View style={[styles.flexRow, {alignItems:'center',flex:1}]}>
-                                        <Text style={styles.fontSize10}>From </Text>
-                                        <Text style={!this.props.theme ? [styles.boldFont, styles.mainColor]:[styles.boldFont, styles.darkFont]}>{item.dob.age}0 GEL</Text>
-                                    </View>
-                                </View>
-                                <View style={[styles.flexRow, styles.itemFlat]}>
-                                    
-                                    <View style={{justifyContent: 'center',alignItems:'flex-end'}}>
-                                        <Text
-                                            style={!this.props.theme ? [styles.mainColor, styles.boldFont]:[styles.darkFont, styles.boldFont]}>{item.registered.date.substring(6, 10)} - {item.dob.date.substring(6, 10)}</Text>
-                                    </View>
-                                    
-                                    <TouchableHighlight
-                                        underlayColor={'#e7e7e7'}
-                                        style={this.state.selectedContact !== item.email ?
-                                            styles._highlight : styles._highlightSelected}
-                                        activeOpacity={.8}
-                                        onPress={() => this.setState({selectedContact: item.email})}
-                                        onHideUnderlay={this.pressButtonHide.bind(this)}
-                                        onShowUnderlay={this.pressButtonShow.bind(this)}
-                                    >
-                                        <View style={[styles.flexRow, {alignItems: 'center',flex:1}]}>
-                                            <View style={styles.booking}>
-                                                <Text style={
-                                                    this.state.selectedContact !== item.email ?
-                                                        styles.blackFont : styles.whiteFont
-                                                }>Book now</Text>
-                                            </View>
-                                            
-                                            <View style={styles.booking}>
-                                                <Image
-                                                    source={require('../Assets/image/right-arrow.png')}
-                                                />
-                                            </View>
-                                        </View>
-                                    </TouchableHighlight>
-                                </View>
-                            
-                            
+                        <View style={styles.menuItems}>
+                            <Text style={[styles.fontSize10, styles.boldFont, styles.greyFont]}>Check-in</Text>
+                        </View>
+                        <View style={styles.menuItems}>
+                            <Text style={[styles.fontSize10, styles.boldFont, styles.greyFont]}>Flight Status</Text>
+                            {this.state.menu &&
+                            <View style={styles.hiddenMenu}>
+                                <TouchableOpacity>
+                                    <Text style={[styles.mainColor, styles.boldFont]}>Home</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity>
+                                    <Text style={[styles.mainColor, styles.boldFont]}>Menu</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity>
+                                    <Text style={[styles.mainColor, styles.boldFont]}>About</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity>
+                                    <Text style={[styles.mainColor, styles.boldFont]}>Contact</Text>
+                                </TouchableOpacity>
                             </View>
-                            
-                            
-                        }
-                    />
-                    {/*FlatList ends here*/}
+                            }
+                        </View>
+                        <View style={styles.menuItems}>
+                            <Text
+                                style={!this.props.theme ? [styles.fontSize10, styles.boldFont, styles.mainColor] : [styles.fontSize10, styles.boldFont, styles.darkFont]}
+                                onPress={() => this.pressMenu()}>Menu</Text>
+                        
+                        
+                        </View>
+                        <View style={[styles.menuItems, styles.lineMenu]}>
+                            <View style={!this.props.theme ? {
+                                borderBottomWidth: 2,
+                                borderBottomColor: '#405089',
+                                width: 15
+                            } : {borderBottomWidth: 2, borderBottomColor: '#fff', width: 15}}></View>
+                            <View style={!this.props.theme ? {
+                                borderTopWidth: 2,
+                                borderTopColor: '#405089',
+                                width: 25
+                            } : {borderTopWidth: 2, borderTopColor: '#fff', width: 25}}></View>
+                        </View>
+                    </View>
+                    <View style={styles.titleHeader}>
+                        <Text
+                            style={!this.props.theme ? [styles.fontSizeTitle, styles.mainColor] : [styles.fontSizeTitle, styles.darkFont]}>Best
+                            Value Offers to Europe!</Text>
+                    </View>
+                    
+                    <View style={styles._flatList}>
+                        
+                        {/*FlatList starts here*/}
+                        
+                        <FlatList
+                            data={this.state.lastData}
+                            keyExtractor={(item) => item.email}
+                            ListHeaderComponent={this.header}
+                            ListFooterComponent={this.footer}
+                            onEndReached={() => this.handleEnd()}
+                            onEndReachedThreshold={.5}
+                            extraData={() => this.state.selected}
+                            renderItem={({item}) =>
+                                
+                                
+                                <View style={!this.props.theme ? styles.flatListInside : styles.flatListInsideDark}>
+                                    <View style={[styles.flexRow, styles.itemFlat]}>
+                                        <View style={{alignItems: 'flex-start', flex: 1}}>
+                                            <Text
+                                                style={!this.props.theme ? [styles.boldFont, styles.mainColor] : [styles.boldFont, styles.darkFont]}>{item.location.city.charAt(0).toUpperCase() + item.location.city.slice(1).toLowerCase()}</Text>
+                                        </View>
+                                        <View style={[styles.flexRow, {alignItems: 'center', flex: 1}]}>
+                                            <Text style={styles.fontSize10}>From </Text>
+                                            <Text
+                                                style={!this.props.theme ? [styles.boldFont, styles.mainColor] : [styles.boldFont, styles.darkFont]}>{item.dob.age}0
+                                                GEL</Text>
+                                        </View>
+                                    </View>
+                                    <View style={[styles.flexRow, styles.itemFlat]}>
+                                        
+                                        <View style={{justifyContent: 'center', alignItems: 'flex-end'}}>
+                                            <Text
+                                                style={!this.props.theme ? [styles.mainColor, styles.boldFont] : [styles.darkFont, styles.boldFont]}>{item.registered.date.substring(6, 10)} - {item.dob.date.substring(6, 10)}</Text>
+                                        </View>
+                                        
+                                        <TouchableHighlight
+                                            underlayColor={'#e7e7e7'}
+                                            style={this.state.selectedContact !== item.email ?
+                                                styles._highlight : styles._highlightSelected}
+                                            activeOpacity={.8}
+                                            onPress={() => this.setState({selectedContact: item.email})}
+                                            onHideUnderlay={this.pressButtonHide.bind(this)}
+                                            onShowUnderlay={this.pressButtonShow.bind(this)}
+                                        >
+                                            <View style={[styles.flexRow, {alignItems: 'center', flex: 1}]}>
+                                                <View style={styles.booking}>
+                                                    <Text style={
+                                                        this.state.selectedContact !== item.email ?
+                                                            styles.blackFont : styles.whiteFont
+                                                    }>Book now</Text>
+                                                </View>
+                                                
+                                                <View style={styles.booking}>
+                                                    <Image
+                                                        source={require('../Assets/image/right-arrow.png')}
+                                                    />
+                                                </View>
+                                            </View>
+                                        </TouchableHighlight>
+                                    </View>
+                                
+                                
+                                </View>
+                                
+                                
+                            }
+                        />
+                        {/*FlatList ends here*/}
+                    
+                    </View>
+                    
+                    <View style={styles._footer}>
+                        <View>
+                            <Text style={[styles.fontSize10, styles.greyFont]}>*Round-trip including all taxes,</Text>
+                            <Text style={[styles.fontSize10, styles.greyFont]}>fees and carrier charges.</Text>
+                        </View>
+                        <View>
+                            <Text
+                                style={!this.props.theme ? [styles.mainColor, styles.boldFont] : [styles.darkFont, styles.boldFont]}>See
+                                all</Text>
+                        </View>
+                    </View>
                 
                 </View>
-                
-                <View style={styles._footer}>
-                    <View>
-                        <Text style={[styles.fontSize10, styles.greyFont]}>*Round-trip including all taxes,</Text>
-                        <Text style={[styles.fontSize10, styles.greyFont]}>fees and carrier charges.</Text>
-                    </View>
-                    <View>
-                        <Text style={!this.props.theme ? [styles.mainColor, styles.boldFont]:[styles.darkFont, styles.boldFont]}>See all</Text>
-                    </View>
-                </View>
-            
-            </View>
         );
     }
 }
@@ -190,8 +219,9 @@ const styles = StyleSheet.create({
     rightSide: {
         flex: 1,
         paddingTop: 20,
-    
+        
     },
+ 
     menuHeader: {
         justifyContent: 'flex-end',
         flexDirection: 'row',
@@ -273,7 +303,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-evenly',
         // backgroundColor:'green',
         // width: 250,
-        flex:1
+        flex: 1
     },
     fontSize10: {
         fontSize: 10,
@@ -282,8 +312,8 @@ const styles = StyleSheet.create({
     mainColor: {
         color: '#454c75'
     },
-    darkFont:{
-        color:'#fff'
+    darkFont: {
+        color: '#fff'
     },
     greyFont: {
         color: '#9aa0ae'
@@ -294,7 +324,7 @@ const styles = StyleSheet.create({
         padding: 9
     },
     hiddenMenu: {
-        backgroundColor:'#fcfcfc',
+        backgroundColor: '#fcfcfc',
         width: 140,
         height: 160,
         justifyContent: 'center',

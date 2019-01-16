@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, Text, StyleSheet, Image, TouchableOpacity, TouchableHighlight} from 'react-native';
+import {View, Text, StyleSheet, Image, TouchableOpacity, KeyboardAvoidingView,Platform} from 'react-native';
 import LeftSide from "../Components/LeftSide";
 import RightSide from "../Components/RightSide";
 import Bottom from "../Components/Bottom";
@@ -17,6 +17,8 @@ export default class Home extends Component {
     
     render() {
         return (
+            <KeyboardAvoidingView style={styles.KeyboardAvoidingView}>
+    
             <View style={
                 this.state.theme ?
                     styles.darkHome :
@@ -41,12 +43,14 @@ export default class Home extends Component {
                         
                         
                     </View>
-                    <RightSide theme={this.state.theme}/>
+                        <RightSide theme={this.state.theme}/>
                 </View>
                 <View style={styles.downWrapper}>
                     <Bottom theme={this.state.theme}/>
                 </View>
             </View>
+            </KeyboardAvoidingView>
+
         );
     }
 }
@@ -78,5 +82,8 @@ const styles = StyleSheet.create({
         height: 50,
         width: 80,
         justifyContent: 'center',
-    }
+    },
+    KeyboardAvoidingView: {
+        flex: 1
+    },
 });

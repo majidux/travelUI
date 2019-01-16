@@ -19,8 +19,7 @@ export default class LeftSide extends Component {
     }
     
     
-    timer = () => this.timer = setInterval(() => this._time(), 1000);
-    _time = () => this.setState({date: new Date()});
+    timer = () => this.timer = setInterval(() => this.setState({date: new Date()}), 1000);
     
     check = () => this.setState({checkBox: !this.state.checkBox});
     
